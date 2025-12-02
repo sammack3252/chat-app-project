@@ -1,2 +1,3 @@
 README template required by professor:
-[Option1A&1B_Programming_Project_README_Template.docx](https://github.com/user-attachments/files/23874914/Option1A.1B_Programming_Project_README_Template.docx)
+[README_Samantha Mack.docx](https://github.com/user-attachments/files/23886897/README_Samantha.Mack.docx)
+
