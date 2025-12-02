@@ -6,36 +6,33 @@
 </head>
 <body>
   <h2>Chat Room</h2>
-  <form id="userForm">
-    <label for="username">Name:</label>
-    <input type="text" id="username" name="username">
-    <button type="submit">Submit</button>
-  </form>
   <textarea id="chat" cols="50" rows="15" readonly></textarea><br>
-  <input type="text" id="msg" placeholder="Type message..." />
+  <input type="text" id="msg" placeholder="Type message..."" />
   <button onclick="send()">Send</button>
 
   <script>
-    document.getElementById("userForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevents page reload
 
     // Get the value of the input field
-    const userName = document.getElementById("username").value;
+    const userName = prompt("Please enter your name:", "Default Name");
 
     // Display the input value
     console.log("User Name:", userName);
-    alert(`Hello, ${userName}!`);
-    });
+    alert(`Name changed to: ${userName}`);
+
     const chat = document.getElementById("chat");
     const msg = document.getElementById("msg");
-    const ws = new WebSocket("ws://localhost:6789");
+    const ws = new WebSocket("ws://localhost:11037");
 
-    ws.onmessage = e => chat.value += e.data + "\n";
+    ws.onmessage = e => chat.value += e.data = "\n";
 
     function send() {
       const txt = msg.value;
+      //checking for group chat
+      //if(txt == "/join gamers")
+      //userGroup = 1;
       ws.send(txt);
-      chat.value += "<You>: " + txt + "\n";
+      chat.value += "<" + userName + ">: " + txt + "\n";
+      //ws.send(chat.value);
       msg.value = "";
     }
   </script>
