@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat</title>
+</head>
+<body>
+  <h2>Chat Room</h2>
+  <form id="userForm">
+    <label for="username">Name:</label>
+    <input type="text" id="username" name="username">
+    <button type="submit">Submit</button>
+  </form>
+  <textarea id="chat" cols="50" rows="15" readonly></textarea><br>
+  <input type="text" id="msg" placeholder="Type message..." />
+  <button onclick="send()">Send</button>
+
+  <script>
+    document.getElementById("userForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevents page reload
+
+    // Get the value of the input field
+    const userName = document.getElementById("username").value;
+
+    // Display the input value
+    console.log("User Name:", userName);
+    alert(`Hello, ${userName}!`);
+    });
+    const chat = document.getElementById("chat");
+    const msg = document.getElementById("msg");
+    const ws = new WebSocket("ws://localhost:6789");
+
+    ws.onmessage = e => chat.value += e.data + "\n";
+
+    function send() {
+      const txt = msg.value;
+      ws.send(txt);
+      chat.value += "<You>: " + txt + "\n";
+      msg.value = "";
+    }
+  </script>
+</body>
+</html>
